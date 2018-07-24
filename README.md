@@ -3,7 +3,7 @@ COM port terminal with RegEx filter highlighting
 Visual Studio Project
 
 # Pictures
-Configure Regular expression highlight of incommming data
+Configure Regular expression highlight of incomming data
 
 ![Picture2](pics/pic2.png)
 
