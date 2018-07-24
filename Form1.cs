@@ -81,26 +81,14 @@ namespace SerialTerminal {
 				this.bold_checkBox[i] = new System.Windows.Forms.CheckBox();
 				this.testRegexBtn[i] = new System.Windows.Forms.Button();
 				this.regexBox[i] = new System.Windows.Forms.TextBox();
-				this.groupBox[i].SuspendLayout();
 			}
 
+			this.layoutPanel.RowCount = numControls;
+			var row = 0;
+
 			for (int i = 0; i < numControls; i++) {
-				this.Highlight.Controls.Add(this.groupBox[i]);
-				// 
-				// groupBox1
-				// 
-				this.groupBox[i].Controls.Add(this.colorBtn[i]);
-				this.groupBox[i].Controls.Add(this.underline_checkBox[i]);
-				this.groupBox[i].Controls.Add(this.bold_checkBox[i]);
-				this.groupBox[i].Controls.Add(this.testRegexBtn[i]);
-				this.groupBox[i].Controls.Add(this.regexBox[i]);
-				this.groupBox[i].Name = "groupBox";
-				this.groupBox[i].Size = new System.Drawing.Size(200, 73);
-				this.groupBox[i].TabIndex = 3;
-				this.groupBox[i].TabStop = false;
-				this.groupBox[i].Tag = i;
-				this.groupBox[i].Text = "RegEx" + (i + 1);
-				this.groupBox[i].MouseClick += new System.Windows.Forms.MouseEventHandler(this.groupEnableDisable);
+				this.layoutPanel.Controls.Add(this.groupBox[i], i%2, row);
+				row += i % 2;
 
 				// 
 				// colorBtn1
@@ -143,7 +131,8 @@ namespace SerialTerminal {
 				// 
 				// testRegexBtn1
 				// 
-				this.testRegexBtn[i].Location = new System.Drawing.Point(158, 18);
+				this.testRegexBtn[i].Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top)));
+				this.testRegexBtn[i].Location = new System.Drawing.Point(196, 19);
 				this.testRegexBtn[i].Name = "testRegexBtn";
 				this.testRegexBtn[i].Size = new System.Drawing.Size(38, 23);
 				this.testRegexBtn[i].TabIndex = 1;
@@ -152,26 +141,37 @@ namespace SerialTerminal {
 				this.testRegexBtn[i].Tag = i;
 				this.testRegexBtn[i].Click += new System.EventHandler(this.TestRegex);
 
+
 				// 
 				// regexBox1
 				// 
+				this.regexBox[i].Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top)));
 				this.regexBox[i].Location = new System.Drawing.Point(6, 19);
 				this.regexBox[i].Name = "regexBox";
-				this.regexBox[i].Size = new System.Drawing.Size(150, 20);
+				this.regexBox[i].Size = new System.Drawing.Size(188, 40);
 				this.regexBox[i].TabIndex = 0;
 				this.regexBox[i].Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 				this.regexBox[i].Tag = i;
 				this.regexBox[i].TextChanged += new System.EventHandler(this.updateRegex);
+
+				// 
+				// groupBox1
+				// 
+				this.groupBox[i].Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+				this.groupBox[i].Controls.Add(this.colorBtn[i]);
+				this.groupBox[i].Controls.Add(this.underline_checkBox[i]);
+				this.groupBox[i].Controls.Add(this.bold_checkBox[i]);
+				this.groupBox[i].Controls.Add(this.testRegexBtn[i]);
+				this.groupBox[i].Controls.Add(this.regexBox[i]);
+				this.groupBox[i].Name = "groupBox" + (i + 1);
+				this.groupBox[i].Size = new System.Drawing.Size(242, 73);
+				this.groupBox[i].TabIndex = 3;
+				this.groupBox[i].TabStop = false;
+				this.groupBox[i].Tag = i;
+				this.groupBox[i].Text = "RegEx" + (i + 1);
+				this.groupBox[i].MouseClick += new System.Windows.Forms.MouseEventHandler(this.groupEnableDisable);
 			}
 
-			this.groupBox[0].Location = new System.Drawing.Point(6, 70);
-			this.groupBox[1].Location = new System.Drawing.Point(230, 70);
-			this.groupBox[2].Location = new System.Drawing.Point(6, 155);
-			this.groupBox[3].Location = new System.Drawing.Point(230, 155);
-			this.groupBox[4].Location = new System.Drawing.Point(6, 240);
-			this.groupBox[5].Location = new System.Drawing.Point(230, 240);
-			this.groupBox[6].Location = new System.Drawing.Point(6, 325);
-			this.groupBox[7].Location = new System.Drawing.Point(230, 325);
 		}
 
 		#endregion

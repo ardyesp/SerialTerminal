@@ -39,6 +39,7 @@
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.Console = new System.Windows.Forms.TabPage();
 			this.Highlight = new System.Windows.Forms.TabPage();
+			this.layoutPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.highlightedOutputBox = new System.Windows.Forms.RichTextBox();
 			this.sampleInputBox = new System.Windows.Forms.TextBox();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -247,6 +248,7 @@
 			// Highlight
 			// 
 			this.Highlight.BackColor = System.Drawing.Color.LightGray;
+			this.Highlight.Controls.Add(this.layoutPanel);
 			this.Highlight.Controls.Add(this.highlightedOutputBox);
 			this.Highlight.Controls.Add(this.sampleInputBox);
 			this.Highlight.Location = new System.Drawing.Point(4, 22);
@@ -258,6 +260,22 @@
 			this.Highlight.ToolTipText = "Right click to Enable/Disable all RegEx highlights";
 			this.Highlight.MouseClick += new System.Windows.Forms.MouseEventHandler(this.highlightEnableDisable);
 			// 
+			// layoutPanel
+			// 
+			this.layoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.layoutPanel.BackColor = System.Drawing.Color.Transparent;
+			this.layoutPanel.ColumnCount = 2;
+			this.layoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.layoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.layoutPanel.Location = new System.Drawing.Point(6, 66);
+			this.layoutPanel.Name = "layoutPanel";
+			this.layoutPanel.RowCount = 1;
+			this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.layoutPanel.Size = new System.Drawing.Size(490, 329);
+			this.layoutPanel.TabIndex = 3;
+			// 
 			// highlightedOutputBox
 			// 
 			this.highlightedOutputBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -268,7 +286,7 @@
 			this.highlightedOutputBox.Multiline = false;
 			this.highlightedOutputBox.Name = "highlightedOutputBox";
 			this.highlightedOutputBox.ReadOnly = true;
-			this.highlightedOutputBox.Size = new System.Drawing.Size(595, 20);
+			this.highlightedOutputBox.Size = new System.Drawing.Size(491, 20);
 			this.highlightedOutputBox.TabIndex = 2;
 			this.highlightedOutputBox.Text = " Highlighted Output";
 			this.highlightedOutputBox.WordWrap = false;
@@ -280,7 +298,7 @@
 			this.sampleInputBox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.sampleInputBox.Location = new System.Drawing.Point(6, 10);
 			this.sampleInputBox.Name = "sampleInputBox";
-			this.sampleInputBox.Size = new System.Drawing.Size(594, 23);
+			this.sampleInputBox.Size = new System.Drawing.Size(490, 23);
 			this.sampleInputBox.TabIndex = 1;
 			this.sampleInputBox.Text = "Sample Input";
 			// 
@@ -396,6 +414,7 @@
 		private System.Windows.Forms.StatusStrip statusStrip1;
 		private System.Windows.Forms.ToolStripStatusLabel logLabel;
 		private System.Windows.Forms.ToolStripProgressBar rxBufferBar;
+		private System.Windows.Forms.TableLayoutPanel layoutPanel;
 
 	}
 }
