@@ -193,5 +193,27 @@ namespace SerialTerminal.Properties {
                 this["group8Highlight"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection group9Highlight {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["group9Highlight"]));
+            }
+            set {
+                this["group9Highlight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection group10Highlight {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["group10Highlight"]));
+            }
+            set {
+                this["group10Highlight"] = value;
+            }
+        }
     }
 }

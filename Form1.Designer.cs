@@ -27,7 +27,6 @@
 			this.BaudratesSel = new System.Windows.Forms.ComboBox();
 			this.SerialPortsSel = new System.Windows.Forms.ComboBox();
 			this.SendBtn = new System.Windows.Forms.Button();
-			this.txDataTextBox = new System.Windows.Forms.TextBox();
 			this.OpenBtn = new System.Windows.Forms.Button();
 			this.ClearBtn = new System.Windows.Forms.Button();
 			this.CloseBtn = new System.Windows.Forms.Button();
@@ -48,6 +47,7 @@
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.logLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.rxBufferBar = new System.Windows.Forms.ToolStripProgressBar();
+			this.txBox = new System.Windows.Forms.ComboBox();
 			this.tabControl1.SuspendLayout();
 			this.Console.SuspendLayout();
 			this.Highlight.SuspendLayout();
@@ -99,18 +99,6 @@
 			this.SendBtn.Text = "▶ Send";
 			this.SendBtn.UseVisualStyleBackColor = true;
 			this.SendBtn.Click += new System.EventHandler(this.SendBtn_Click);
-			// 
-			// txDataTextBox
-			// 
-			this.txDataTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.txDataTextBox.Enabled = false;
-			this.txDataTextBox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.txDataTextBox.Location = new System.Drawing.Point(62, 3);
-			this.txDataTextBox.Name = "txDataTextBox";
-			this.txDataTextBox.Size = new System.Drawing.Size(391, 23);
-			this.txDataTextBox.TabIndex = 0;
-			this.txDataTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txDataTextBox_KeyDown);
 			// 
 			// OpenBtn
 			// 
@@ -184,6 +172,7 @@
 			this.rxDataTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.rxDataTextBox.DetectUrls = false;
 			this.rxDataTextBox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.rxDataTextBox.Location = new System.Drawing.Point(0, 0);
 			this.rxDataTextBox.Name = "rxDataTextBox";
@@ -217,6 +206,7 @@
 			this.lineEndingBox.Name = "lineEndingBox";
 			this.lineEndingBox.Size = new System.Drawing.Size(55, 21);
 			this.lineEndingBox.TabIndex = 13;
+			this.lineEndingBox.SelectedIndexChanged += new System.EventHandler(this.lineEndingBox_SelectedIndexChanged);
 			// 
 			// tabControl1
 			// 
@@ -319,7 +309,7 @@
 			this.label2.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label2.Location = new System.Drawing.Point(6, 12);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(499, 286);
+			this.label2.Size = new System.Drawing.Size(499, 312);
 			this.label2.TabIndex = 2;
 			this.label2.Text = resources.GetString("label2.Text");
 			// 
@@ -349,12 +339,25 @@
 			this.rxBufferBar.Size = new System.Drawing.Size(50, 16);
 			this.rxBufferBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
 			// 
+			// txBox
+			// 
+			this.txBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.txBox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.txBox.FormattingEnabled = true;
+			this.txBox.Location = new System.Drawing.Point(65, 4);
+			this.txBox.Name = "txBox";
+			this.txBox.Size = new System.Drawing.Size(385, 23);
+			this.txBox.TabIndex = 16;
+			this.txBox.SelectedIndexChanged += new System.EventHandler(this.txBox_SelectedIndexChanged);
+			// 
 			// Form1
 			// 
 			this.AcceptButton = this.SendBtn;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(514, 502);
+			this.Controls.Add(this.txBox);
 			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.tabControl1);
 			this.Controls.Add(this.lineEndingBox);
@@ -364,7 +367,6 @@
 			this.Controls.Add(this.SendBtn);
 			this.Controls.Add(this.CloseBtn);
 			this.Controls.Add(this.SerialPortsSel);
-			this.Controls.Add(this.txDataTextBox);
 			this.Controls.Add(this.ClearBtn);
 			this.Controls.Add(this.BaudratesSel);
 			this.Controls.Add(this.OpenBtn);
@@ -394,7 +396,6 @@
 		private System.Windows.Forms.ComboBox BaudratesSel;
 		private System.Windows.Forms.ComboBox SerialPortsSel;
 		private System.Windows.Forms.Button SendBtn;
-		private System.Windows.Forms.TextBox txDataTextBox;
 		private System.Windows.Forms.Button OpenBtn;
 		private System.Windows.Forms.Button ClearBtn;
 		private System.Windows.Forms.Button CloseBtn;
@@ -415,6 +416,7 @@
 		private System.Windows.Forms.ToolStripStatusLabel logLabel;
 		private System.Windows.Forms.ToolStripProgressBar rxBufferBar;
 		private System.Windows.Forms.TableLayoutPanel layoutPanel;
+		private System.Windows.Forms.ComboBox txBox;
 
 	}
 }

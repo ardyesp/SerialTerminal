@@ -140,7 +140,8 @@ Examples:
 Cursor/Focus on the message console area, when serial data is being received: 
   - Will cause auto-scrolling, even when Autoscroll is turned off.
   - May cause wrong section of data to be highlighted by filters.
-</value>
+
+RegEx will work if selected Line Endings (CR, LF) match that of incoming data</value>
   </data>
   <metadata name="colorDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

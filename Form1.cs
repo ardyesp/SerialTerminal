@@ -9,6 +9,7 @@ using System.Reflection;
 namespace SerialTerminal {
 	public partial class Form1 : Form, IMessageFilter {
 		bool hovered;
+		bool newTxItem;
 		MethodInfo wndProc;
 
 		private System.Windows.Forms.GroupBox[] groupBox;
@@ -18,9 +19,8 @@ namespace SerialTerminal {
 		private System.Windows.Forms.CheckBox[] underline_checkBox;
 		private System.Windows.Forms.Button[] colorBtn;
 
-		int numControls = 8;
+		int numControls = 10;
 		SerialPort comPort;
-		char[] splitLineArr = { '\r', '\n' };
 
 		// highlight specific variables
 		bool globalHighlightEnabled;
@@ -36,6 +36,7 @@ namespace SerialTerminal {
 		// --------------------------
 			InitializeComponent();
 			InitializeControlArray();
+			this.txBox.KeyDown += txBox_KeyDown;
 			defaultFont = (Font) rxDataTextBox.Font.Clone();
 			// rxDataTextBox.GotFocus += (s, e) => CopyBtn.Focus();
 
@@ -264,83 +265,41 @@ namespace SerialTerminal {
 		}
 
 
+
 		// --------------------------
-		private void txDataTextBox_KeyDown(object sender, KeyEventArgs e) {
-			// --------------------------
+		private void txBox_KeyDown(object sender, KeyEventArgs e) {
+		// --------------------------
+			if ((e.KeyCode == Keys.Up) || (e.KeyCode == Keys.Down))
+				return;
+
+			// user typed in something
+			newTxItem = true;
+
 			if (e.KeyCode == Keys.Enter)
 				txData();
 		}
 
 
 		// --------------------------
+		private void txBox_SelectedIndexChanged(object sender, EventArgs e) {
+		// --------------------------
+			newTxItem = false;
+		}
+
+
+
+		// --------------------------
+		private void lineEndingBox_SelectedIndexChanged(object sender, EventArgs e) {
+		// --------------------------
+			setLineEndings();
+		}
+
+		
+
+		// --------------------------
 		private void OpenBtn_Click(object sender, EventArgs e) {
 		// --------------------------
-			string port = SerialPortsSel.Text;
-			string baudRate = BaudratesSel.Text;
-
-			// verify the correct port/baud rate
-			if (port == "") {
-				error("Invalid COM port");
-				return;
-			}
-
-			int intBaud;
-			bool isNumeric = int.TryParse(baudRate, out intBaud);
-
-			if(!isNumeric) {
-				error("Invalid baud rate");
-				return;
-			}
-
-			try {
-				// set and try to open the COM port
-				log("Opening port...");
-				comPort = new SerialPort(port, intBaud);
-				comPort.RtsEnable = true;
-				comPort.DtrEnable = true;
-				comPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
-				comPort.ReadTimeout = 500;
-				comPort.Open();
-				log(port + " open");
-				
-				// set button states
-				OpenBtn.Enabled = false;
-				CloseBtn.Enabled = true;
-				RefreshBtn.Enabled = false;
-				SerialPortsSel.Enabled = false;
-				BaudratesSel.Enabled = false;
-				SendBtn.Enabled = true;
-				txDataTextBox.Enabled = true;
-
-				// start a port monitoring thread
-				(new System.Threading.Thread(() => {
-					int bufLevel = 0;
-					int maxBuffer = 50000;
-					try {
-						while (comPort.IsOpen) {
-							bufLevel = comPort.BytesToRead;
-							System.Threading.Thread.Sleep(500);
-							this.Invoke(new Action<int>(setBufferLevel), new object[] { (bufLevel * 100 / maxBuffer) });
-							if (globalHighlightEnabled && (bufLevel > maxBuffer)) {
-								globalHighlightEnabled = false;
-								this.Invoke(new Action<string>(error), new object[] { "Too much data backlog, disabling highlighting" });
-								this.Invoke(new Action<bool>(changeHighlight), new object[] { globalHighlightEnabled });
-							}
-						}
-						// port closed
-						this.Invoke(new Action(() => { CloseBtn.PerformClick(); }));
-					}
-					catch {
-						try { comPort.Close(); } catch { }
-					}
-
-				})).Start();
-
-			}
-			catch(Exception excp) {
-				error("Unable to open Serial: " + excp.Message);
-				try { comPort.Close(); } catch { }
-			}
+			OpenComPort();
 		}
 		
 
@@ -372,26 +331,7 @@ namespace SerialTerminal {
 		// --------------------------
 		private void CloseBtn_Click(object sender, EventArgs e) {
 		// --------------------------
-			try {
-				log("Closing COM port...");
-				CloseBtn.Enabled = false;
-				OpenBtn.Enabled = true;
-				RefreshBtn.Enabled = true;
-				SerialPortsSel.Enabled = true;
-				BaudratesSel.Enabled = true;
-				SendBtn.Enabled = false;
-				txDataTextBox.Enabled = false;
-
-				(new System.Threading.Thread(() => {
-					comPort.Close();
-					this.Invoke(new Action<string>(log), new object[] { "Port closed" });
-					System.Threading.Thread.Sleep(600);
-					this.Invoke(new Action<int>(setBufferLevel), new object[] { 0 });
-				})).Start();
-
-			}
-			catch {
-			}
+			CloseComPort();
 		}
 
 
@@ -403,36 +343,6 @@ namespace SerialTerminal {
 		}
 
 		
-		// --------------------------
-		private void txData() {
-		// --------------------------
-			string Data = txDataTextBox.Text;
-
-			try {
-				switch (lineEndingBox.Text) {
-					case "None":
-						comPort.WriteLine(Data);
-						break;
-					case "CR":
-						comPort.WriteLine(Data + "\r");
-						break;
-					case "LF":
-						comPort.WriteLine(Data + "\n");
-						break;
-					case "CR/LF":
-						comPort.WriteLine(Data + "\r\n");
-						break;
-				}
-
-				inject("SENT: " + Data);
-			}
-			catch (Exception excp) {
-				error("Unable to send data: " + excp.Message);
-				try { comPort.Close(); }
-				catch { }
-			}
-		}
-
 		#endregion
 
 		#region HighlighterControls
@@ -483,7 +393,6 @@ namespace SerialTerminal {
 		}
 
 
-		#region EnableAndDisable
 
 		// --------------------------
 		private void updateFonts(object sender, EventArgs e) {
@@ -577,136 +486,6 @@ namespace SerialTerminal {
 				Highlight.Enabled = false;
 				this.Highlight.BackColor = System.Drawing.Color.Gray;
 			}
-		}
-
-		#endregion
-
-		#endregion
-
-		#region Logging
-
-		// --------------------------
-		private void inject(string message) {
-		// --------------------------
-			rxDataTextBox.SelectionBackColor = Color.DarkSlateGray;
-			rxDataTextBox.SelectionColor = Color.White;
-			
-			if (autoscroll.Checked) {
-				rxDataTextBox.AppendText(message + "\r\n");
-				rxDataTextBox.SelectionStart = rxDataTextBox.Text.Length;
-				rxDataTextBox.ScrollToCaret();
-			}
-			else {
-				rxDataTextBox.AppendText(message + "\r\n");
-			}
-		}
-
-
-		// --------------------------
-		private void log(string message) {
-		// --------------------------
-			logLabel.ForeColor = default(Color);
-			logLabel.Text = message;
-		}
-
-
-		// --------------------------
-		private void error(string message) {
-		// --------------------------
-			logLabel.ForeColor = Color.Red;
-			logLabel.Text = message;
-			logLabel.ToolTipText += "ERROR: " + message + "\r\n";
-			System.Media.SystemSounds.Beep.Play();
-		}
-
-
-		// --------------------------
-		private void setBufferLevel(int percent) {
-		// --------------------------
-			if (percent > 100)
-				percent = 100;
-			rxBufferBar.Value = percent;
-		}
-
-		#endregion
-
-		#region SerialPortData
-
-		// --------------------------
-		private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e) {
-		// --------------------------
-			this.Invoke(new Action(ProcessPrintSerialData), new object[] { });
-		}
-
-
-		// --------------------------
-		public void ProcessPrintSerialData() {
-		// --------------------------
-			try {
-				try {
-					int numBytesInBuf = comPort.BytesToRead;
-					while ((numBytesInBuf > 0) && comPort.IsOpen) {
-						String strLine = comPort.ReadLine();
-						numBytesInBuf -= strLine.Length;
-						// apply the highlight filters if asked for
-						if (globalHighlightEnabled)
-							applyFilters(strLine);
-						else
-							rxDataTextBox.AppendText(strLine);
-					}
-				}
-				catch (TimeoutException) {
-					if (comPort.IsOpen && (comPort.BytesToRead > 0))
-						rxDataTextBox.AppendText(comPort.ReadExisting());
-					return;
-				}
-				catch (Exception ex) {
-					error("Error applying Regex highlighting");
-					System.Console.WriteLine(ex.ToString());
-				}
-
-
-				if (autoscroll.Checked) {
-					rxDataTextBox.HideSelection = false;
-					rxDataTextBox.SelectionStart = rxDataTextBox.Text.Length;
-					rxDataTextBox.ScrollToCaret();
-				}
-			}
-			catch { }
-		}
-
-
-
-		// --------------------------
-		private void applyFilters(string text) {
-		// --------------------------
-			for (int index = 0; index < numControls; index++) {
-				if (groupHighlightEnabled[index]) {
-					Match m = regex[index].Match(text);
-
-					if (m.Success) {
-						int curIdx = 0;
-						while (m.Success) {
-							// matching one group only
-							Group g = m.Groups[1];
-							rxDataTextBox.AppendText(text.Substring(curIdx, g.Index - curIdx));
-							rxDataTextBox.SelectionColor = hgColors[index];
-							rxDataTextBox.SelectionFont = hgFonts[index];
-							rxDataTextBox.AppendText(g.Value);
-							rxDataTextBox.SelectionColor = default(Color);
-							rxDataTextBox.SelectionFont = defaultFont;
-							curIdx = g.Index + g.Length;
-							m = m.NextMatch();
-						}
-
-						rxDataTextBox.AppendText(text.Substring(curIdx, text.Length - curIdx));
-						return;
-					}
-				}
-			}
-
-			// no match occoured, just output the line
-			rxDataTextBox.AppendText(text);
 		}
 
 		#endregion
