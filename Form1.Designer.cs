@@ -48,6 +48,7 @@
 			this.logLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.rxBufferBar = new System.Windows.Forms.ToolStripProgressBar();
 			this.txBox = new System.Windows.Forms.ComboBox();
+			this.dtr = new System.Windows.Forms.CheckBox();
 			this.tabControl1.SuspendLayout();
 			this.Console.SuspendLayout();
 			this.Highlight.SuspendLayout();
@@ -70,9 +71,9 @@
             "256000",
             "512000",
             "921600"});
-			this.BaudratesSel.Location = new System.Drawing.Point(220, 455);
+			this.BaudratesSel.Location = new System.Drawing.Point(199, 438);
 			this.BaudratesSel.Name = "BaudratesSel";
-			this.BaudratesSel.Size = new System.Drawing.Size(91, 24);
+			this.BaudratesSel.Size = new System.Drawing.Size(70, 24);
 			this.BaudratesSel.TabIndex = 1;
 			// 
 			// SerialPortsSel
@@ -81,9 +82,9 @@
 			this.SerialPortsSel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.SerialPortsSel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.SerialPortsSel.FormattingEnabled = true;
-			this.SerialPortsSel.Location = new System.Drawing.Point(30, 456);
+			this.SerialPortsSel.Location = new System.Drawing.Point(24, 439);
 			this.SerialPortsSel.Name = "SerialPortsSel";
-			this.SerialPortsSel.Size = new System.Drawing.Size(65, 21);
+			this.SerialPortsSel.Size = new System.Drawing.Size(60, 21);
 			this.SerialPortsSel.Sorted = true;
 			this.SerialPortsSel.TabIndex = 0;
 			// 
@@ -105,7 +106,7 @@
 			this.OpenBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.OpenBtn.BackColor = System.Drawing.SystemColors.Control;
 			this.OpenBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.OpenBtn.Location = new System.Drawing.Point(100, 455);
+			this.OpenBtn.Location = new System.Drawing.Point(86, 438);
 			this.OpenBtn.Name = "OpenBtn";
 			this.OpenBtn.Size = new System.Drawing.Size(55, 23);
 			this.OpenBtn.TabIndex = 4;
@@ -115,9 +116,9 @@
 			// 
 			// ClearBtn
 			// 
-			this.ClearBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.ClearBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.ClearBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.ClearBtn.Location = new System.Drawing.Point(394, 455);
+			this.ClearBtn.Location = new System.Drawing.Point(57, 461);
 			this.ClearBtn.Name = "ClearBtn";
 			this.ClearBtn.Size = new System.Drawing.Size(55, 23);
 			this.ClearBtn.TabIndex = 5;
@@ -131,7 +132,7 @@
 			this.CloseBtn.BackColor = System.Drawing.SystemColors.Control;
 			this.CloseBtn.Enabled = false;
 			this.CloseBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.CloseBtn.Location = new System.Drawing.Point(158, 455);
+			this.CloseBtn.Location = new System.Drawing.Point(142, 438);
 			this.CloseBtn.Name = "CloseBtn";
 			this.CloseBtn.Size = new System.Drawing.Size(55, 23);
 			this.CloseBtn.TabIndex = 6;
@@ -144,7 +145,7 @@
 			this.RefreshBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.RefreshBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.RefreshBtn.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.RefreshBtn.Location = new System.Drawing.Point(3, 455);
+			this.RefreshBtn.Location = new System.Drawing.Point(-1, 438);
 			this.RefreshBtn.Name = "RefreshBtn";
 			this.RefreshBtn.Size = new System.Drawing.Size(23, 23);
 			this.RefreshBtn.TabIndex = 7;
@@ -160,7 +161,7 @@
 			this.autoscroll.Checked = true;
 			this.autoscroll.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.autoscroll.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.autoscroll.Location = new System.Drawing.Point(322, 458);
+			this.autoscroll.Location = new System.Drawing.Point(120, 466);
 			this.autoscroll.Name = "autoscroll";
 			this.autoscroll.Size = new System.Drawing.Size(72, 17);
 			this.autoscroll.TabIndex = 8;
@@ -177,15 +178,15 @@
 			this.rxDataTextBox.Location = new System.Drawing.Point(0, 0);
 			this.rxDataTextBox.Name = "rxDataTextBox";
 			this.rxDataTextBox.ReadOnly = true;
-			this.rxDataTextBox.Size = new System.Drawing.Size(499, 398);
+			this.rxDataTextBox.Size = new System.Drawing.Size(506, 382);
 			this.rxDataTextBox.TabIndex = 10;
 			this.rxDataTextBox.Text = "";
 			this.rxDataTextBox.WordWrap = false;
 			// 
 			// CopyBtn
 			// 
-			this.CopyBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.CopyBtn.Location = new System.Drawing.Point(455, 455);
+			this.CopyBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.CopyBtn.Location = new System.Drawing.Point(0, 461);
 			this.CopyBtn.Name = "CopyBtn";
 			this.CopyBtn.Size = new System.Drawing.Size(55, 23);
 			this.CopyBtn.TabIndex = 11;
@@ -217,10 +218,12 @@
 			this.tabControl1.Controls.Add(this.Highlight);
 			this.tabControl1.Controls.Add(this.tabPage1);
 			this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.tabControl1.Location = new System.Drawing.Point(4, 30);
+			this.tabControl1.Location = new System.Drawing.Point(0, 30);
+			this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
 			this.tabControl1.Name = "tabControl1";
+			this.tabControl1.Padding = new System.Drawing.Point(7, 3);
 			this.tabControl1.SelectedIndex = 0;
-			this.tabControl1.Size = new System.Drawing.Size(507, 424);
+			this.tabControl1.Size = new System.Drawing.Size(514, 408);
 			this.tabControl1.TabIndex = 14;
 			this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.highlightEnableDisable);
 			// 
@@ -230,7 +233,7 @@
 			this.Console.Location = new System.Drawing.Point(4, 22);
 			this.Console.Name = "Console";
 			this.Console.Padding = new System.Windows.Forms.Padding(3);
-			this.Console.Size = new System.Drawing.Size(499, 398);
+			this.Console.Size = new System.Drawing.Size(506, 382);
 			this.Console.TabIndex = 0;
 			this.Console.Text = "Console";
 			this.Console.UseVisualStyleBackColor = true;
@@ -244,7 +247,7 @@
 			this.Highlight.Location = new System.Drawing.Point(4, 22);
 			this.Highlight.Name = "Highlight";
 			this.Highlight.Padding = new System.Windows.Forms.Padding(3);
-			this.Highlight.Size = new System.Drawing.Size(499, 398);
+			this.Highlight.Size = new System.Drawing.Size(506, 382);
 			this.Highlight.TabIndex = 1;
 			this.Highlight.Text = "Highlight";
 			this.Highlight.ToolTipText = "Right click to Enable/Disable all RegEx highlights";
@@ -263,7 +266,7 @@
 			this.layoutPanel.Name = "layoutPanel";
 			this.layoutPanel.RowCount = 1;
 			this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.layoutPanel.Size = new System.Drawing.Size(490, 329);
+			this.layoutPanel.Size = new System.Drawing.Size(497, 333);
 			this.layoutPanel.TabIndex = 3;
 			// 
 			// highlightedOutputBox
@@ -276,7 +279,7 @@
 			this.highlightedOutputBox.Multiline = false;
 			this.highlightedOutputBox.Name = "highlightedOutputBox";
 			this.highlightedOutputBox.ReadOnly = true;
-			this.highlightedOutputBox.Size = new System.Drawing.Size(491, 20);
+			this.highlightedOutputBox.Size = new System.Drawing.Size(498, 20);
 			this.highlightedOutputBox.TabIndex = 2;
 			this.highlightedOutputBox.Text = " Highlighted Output";
 			this.highlightedOutputBox.WordWrap = false;
@@ -288,7 +291,7 @@
 			this.sampleInputBox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.sampleInputBox.Location = new System.Drawing.Point(6, 10);
 			this.sampleInputBox.Name = "sampleInputBox";
-			this.sampleInputBox.Size = new System.Drawing.Size(490, 23);
+			this.sampleInputBox.Size = new System.Drawing.Size(497, 23);
 			this.sampleInputBox.TabIndex = 1;
 			this.sampleInputBox.Text = "Sample Input";
 			// 
@@ -298,7 +301,7 @@
 			this.tabPage1.Location = new System.Drawing.Point(4, 22);
 			this.tabPage1.Name = "tabPage1";
 			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage1.Size = new System.Drawing.Size(499, 398);
+			this.tabPage1.Size = new System.Drawing.Size(506, 382);
 			this.tabPage1.TabIndex = 2;
 			this.tabPage1.Text = "Instructions";
 			this.tabPage1.UseVisualStyleBackColor = true;
@@ -318,7 +321,7 @@
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.logLabel,
             this.rxBufferBar});
-			this.statusStrip1.Location = new System.Drawing.Point(0, 480);
+			this.statusStrip1.Location = new System.Drawing.Point(0, 484);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.ShowItemToolTips = true;
 			this.statusStrip1.Size = new System.Drawing.Size(514, 22);
@@ -343,6 +346,7 @@
 			// 
 			this.txBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.txBox.Enabled = false;
 			this.txBox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.txBox.FormattingEnabled = true;
 			this.txBox.Location = new System.Drawing.Point(65, 4);
@@ -351,25 +355,39 @@
 			this.txBox.TabIndex = 16;
 			this.txBox.SelectedIndexChanged += new System.EventHandler(this.txBox_SelectedIndexChanged);
 			// 
+			// dtr
+			// 
+			this.dtr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.dtr.AutoSize = true;
+			this.dtr.Checked = true;
+			this.dtr.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.dtr.Location = new System.Drawing.Point(274, 442);
+			this.dtr.Name = "dtr";
+			this.dtr.Size = new System.Drawing.Size(49, 17);
+			this.dtr.TabIndex = 17;
+			this.dtr.Text = "DTR";
+			this.dtr.UseVisualStyleBackColor = true;
+			// 
 			// Form1
 			// 
 			this.AcceptButton = this.SendBtn;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(514, 502);
+			this.ClientSize = new System.Drawing.Size(514, 506);
+			this.Controls.Add(this.dtr);
 			this.Controls.Add(this.txBox);
 			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.tabControl1);
 			this.Controls.Add(this.lineEndingBox);
-			this.Controls.Add(this.CopyBtn);
 			this.Controls.Add(this.autoscroll);
 			this.Controls.Add(this.RefreshBtn);
 			this.Controls.Add(this.SendBtn);
 			this.Controls.Add(this.CloseBtn);
 			this.Controls.Add(this.SerialPortsSel);
-			this.Controls.Add(this.ClearBtn);
 			this.Controls.Add(this.BaudratesSel);
 			this.Controls.Add(this.OpenBtn);
+			this.Controls.Add(this.ClearBtn);
+			this.Controls.Add(this.CopyBtn);
 			this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::SerialTerminal.Properties.Settings.Default, "Location", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -417,6 +435,7 @@
 		private System.Windows.Forms.ToolStripProgressBar rxBufferBar;
 		private System.Windows.Forms.TableLayoutPanel layoutPanel;
 		private System.Windows.Forms.ComboBox txBox;
+		private System.Windows.Forms.CheckBox dtr;
 
 	}
 }

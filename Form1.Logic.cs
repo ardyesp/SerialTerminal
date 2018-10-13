@@ -38,7 +38,7 @@ namespace SerialTerminal {
 				comPort = new SerialPort(port, intBaud);
 				setLineEndings();
 				comPort.RtsEnable = true;
-				comPort.DtrEnable = true;
+				comPort.DtrEnable = dtr.Checked;
 				comPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
 				comPort.ReadTimeout = 500;
 				comPort.Open();
