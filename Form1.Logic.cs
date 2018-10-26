@@ -12,8 +12,9 @@ namespace SerialTerminal {
 
 		#region OpenCloseSerial
 
+
 		// --------------------------
-		private void OpenComPort() {
+		private bool OpenComPort() {
 		// --------------------------
 			string port = SerialPortsSel.Text;
 			string baudRate = BaudratesSel.Text;
@@ -21,7 +22,7 @@ namespace SerialTerminal {
 			// verify the correct port/baud rate
 			if (port == "") {
 				error("Invalid COM port");
-				return;
+				return false;
 			}
 
 			int intBaud;
@@ -29,7 +30,7 @@ namespace SerialTerminal {
 
 			if(!isNumeric) {
 				error("Invalid baud rate");
-				return;
+				return false;
 			}
 
 			try {
@@ -44,16 +45,6 @@ namespace SerialTerminal {
 				comPort.Open();
 				log(port + " open");
 				
-				// set button states
-				OpenBtn.Enabled = false;
-				CloseBtn.Enabled = true;
-				CloseBtn.BackColor = System.Drawing.Color.LightCoral;
-				RefreshBtn.Enabled = false;
-				SerialPortsSel.Enabled = false;
-				BaudratesSel.Enabled = false;
-				SendBtn.Enabled = true;
-				txBox.Enabled = true;
-
 				// start a port monitoring thread
 				(new System.Threading.Thread(() => {
 					int bufLevel = 0;
@@ -70,7 +61,7 @@ namespace SerialTerminal {
 							}
 						}
 						// port closed
-						this.Invoke(new Action(() => { CloseBtn.PerformClick(); }));
+						this.Invoke(new Action(() => { openClose.CheckState = CheckState.Unchecked; }));
 					}
 					catch {
 						try { comPort.Close(); } catch { }
@@ -78,10 +69,12 @@ namespace SerialTerminal {
 
 				})).Start();
 
+				return true;
 			}
 			catch(Exception excp) {
 				error("Unable to open Serial: " + excp.Message);
 				try { comPort.Close(); } catch { }
+				return false;
 			}
 		}
 
@@ -91,14 +84,6 @@ namespace SerialTerminal {
 		// --------------------------
 			try {
 				log("Closing COM port...");
-				CloseBtn.Enabled = false;
-				CloseBtn.BackColor = default(Color);
-				OpenBtn.Enabled = true;
-				RefreshBtn.Enabled = true;
-				SerialPortsSel.Enabled = true;
-				BaudratesSel.Enabled = true;
-				SendBtn.Enabled = false;
-				txBox.Enabled = false;
 
 				(new System.Threading.Thread(() => {
 					comPort.Close();
@@ -108,7 +93,8 @@ namespace SerialTerminal {
 				})).Start();
 
 			}
-			catch {
+			catch (Exception excp) {
+				error("Unable to close Serial: " + excp.Message);
 			}
 		}
 

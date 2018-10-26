@@ -294,14 +294,36 @@ namespace SerialTerminal {
 			setLineEndings();
 		}
 
-		
+
 
 		// --------------------------
-		private void OpenBtn_Click(object sender, EventArgs e) {
+		private void openClose_CheckedChanged(object sender, EventArgs e) {
 		// --------------------------
-			OpenComPort();
+			if (openClose.CheckState == CheckState.Checked) {
+				// try to open the serial port
+				if (OpenComPort()) {
+					// set button states
+					openClose.Text = "Close";
+					openClose.BackColor = System.Drawing.Color.LightCoral;
+					RefreshBtn.Enabled = false;
+					SerialPortsSel.Enabled = false;
+					BaudratesSel.Enabled = false;
+					SendBtn.Enabled = true;
+					txBox.Enabled = true;
+				}
+			}
+			else {
+				CloseComPort();
+				openClose.Text = "Open";
+				openClose.BackColor = default(Color);
+				RefreshBtn.Enabled = true;
+				SerialPortsSel.Enabled = true;
+				BaudratesSel.Enabled = true;
+				SendBtn.Enabled = false;
+				txBox.Enabled = false;
+			}
 		}
-		
+
 
 		// --------------------------
 		private void RefreshBtn_Click(object sender, EventArgs e) {
@@ -328,13 +350,6 @@ namespace SerialTerminal {
 		}
 
 		
-		// --------------------------
-		private void CloseBtn_Click(object sender, EventArgs e) {
-		// --------------------------
-			CloseComPort();
-		}
-
-
 		// --------------------------
 		private void CopyBtn_Click(object sender, EventArgs e) {
 		// --------------------------
@@ -489,7 +504,6 @@ namespace SerialTerminal {
 		}
 
 		#endregion
-
 
 	}
 }

@@ -27,9 +27,7 @@
 			this.BaudratesSel = new System.Windows.Forms.ComboBox();
 			this.SerialPortsSel = new System.Windows.Forms.ComboBox();
 			this.SendBtn = new System.Windows.Forms.Button();
-			this.OpenBtn = new System.Windows.Forms.Button();
 			this.ClearBtn = new System.Windows.Forms.Button();
-			this.CloseBtn = new System.Windows.Forms.Button();
 			this.RefreshBtn = new System.Windows.Forms.Button();
 			this.autoscroll = new System.Windows.Forms.CheckBox();
 			this.rxDataTextBox = new System.Windows.Forms.RichTextBox();
@@ -49,6 +47,7 @@
 			this.rxBufferBar = new System.Windows.Forms.ToolStripProgressBar();
 			this.txBox = new System.Windows.Forms.ComboBox();
 			this.dtr = new System.Windows.Forms.CheckBox();
+			this.openClose = new System.Windows.Forms.CheckBox();
 			this.tabControl1.SuspendLayout();
 			this.Console.SuspendLayout();
 			this.Highlight.SuspendLayout();
@@ -71,7 +70,7 @@
             "256000",
             "512000",
             "921600"});
-			this.BaudratesSel.Location = new System.Drawing.Point(199, 438);
+			this.BaudratesSel.Location = new System.Drawing.Point(140, 438);
 			this.BaudratesSel.Name = "BaudratesSel";
 			this.BaudratesSel.Size = new System.Drawing.Size(70, 24);
 			this.BaudratesSel.TabIndex = 1;
@@ -101,19 +100,6 @@
 			this.SendBtn.UseVisualStyleBackColor = true;
 			this.SendBtn.Click += new System.EventHandler(this.SendBtn_Click);
 			// 
-			// OpenBtn
-			// 
-			this.OpenBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.OpenBtn.BackColor = System.Drawing.SystemColors.Control;
-			this.OpenBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.OpenBtn.Location = new System.Drawing.Point(86, 438);
-			this.OpenBtn.Name = "OpenBtn";
-			this.OpenBtn.Size = new System.Drawing.Size(55, 23);
-			this.OpenBtn.TabIndex = 4;
-			this.OpenBtn.Text = "Open";
-			this.OpenBtn.UseVisualStyleBackColor = false;
-			this.OpenBtn.Click += new System.EventHandler(this.OpenBtn_Click);
-			// 
 			// ClearBtn
 			// 
 			this.ClearBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -125,20 +111,6 @@
 			this.ClearBtn.Text = "Clear";
 			this.ClearBtn.UseVisualStyleBackColor = true;
 			this.ClearBtn.Click += new System.EventHandler(this.ClearBtn_Click);
-			// 
-			// CloseBtn
-			// 
-			this.CloseBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.CloseBtn.BackColor = System.Drawing.SystemColors.Control;
-			this.CloseBtn.Enabled = false;
-			this.CloseBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.CloseBtn.Location = new System.Drawing.Point(142, 438);
-			this.CloseBtn.Name = "CloseBtn";
-			this.CloseBtn.Size = new System.Drawing.Size(55, 23);
-			this.CloseBtn.TabIndex = 6;
-			this.CloseBtn.Text = "Close";
-			this.CloseBtn.UseVisualStyleBackColor = false;
-			this.CloseBtn.Click += new System.EventHandler(this.CloseBtn_Click);
 			// 
 			// RefreshBtn
 			// 
@@ -361,12 +333,25 @@
 			this.dtr.AutoSize = true;
 			this.dtr.Checked = true;
 			this.dtr.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.dtr.Location = new System.Drawing.Point(274, 442);
+			this.dtr.Location = new System.Drawing.Point(214, 442);
 			this.dtr.Name = "dtr";
 			this.dtr.Size = new System.Drawing.Size(49, 17);
 			this.dtr.TabIndex = 17;
 			this.dtr.Text = "DTR";
 			this.dtr.UseVisualStyleBackColor = true;
+			// 
+			// openClose
+			// 
+			this.openClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.openClose.Appearance = System.Windows.Forms.Appearance.Button;
+			this.openClose.Location = new System.Drawing.Point(87, 438);
+			this.openClose.Name = "openClose";
+			this.openClose.Size = new System.Drawing.Size(50, 23);
+			this.openClose.TabIndex = 18;
+			this.openClose.Text = "Open";
+			this.openClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.openClose.UseVisualStyleBackColor = false;
+			this.openClose.CheckedChanged += new System.EventHandler(this.openClose_CheckedChanged);
 			// 
 			// Form1
 			// 
@@ -374,6 +359,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(514, 506);
+			this.Controls.Add(this.openClose);
 			this.Controls.Add(this.dtr);
 			this.Controls.Add(this.txBox);
 			this.Controls.Add(this.statusStrip1);
@@ -382,10 +368,8 @@
 			this.Controls.Add(this.autoscroll);
 			this.Controls.Add(this.RefreshBtn);
 			this.Controls.Add(this.SendBtn);
-			this.Controls.Add(this.CloseBtn);
 			this.Controls.Add(this.SerialPortsSel);
 			this.Controls.Add(this.BaudratesSel);
-			this.Controls.Add(this.OpenBtn);
 			this.Controls.Add(this.ClearBtn);
 			this.Controls.Add(this.CopyBtn);
 			this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::SerialTerminal.Properties.Settings.Default, "Location", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -414,9 +398,7 @@
 		private System.Windows.Forms.ComboBox BaudratesSel;
 		private System.Windows.Forms.ComboBox SerialPortsSel;
 		private System.Windows.Forms.Button SendBtn;
-		private System.Windows.Forms.Button OpenBtn;
 		private System.Windows.Forms.Button ClearBtn;
-		private System.Windows.Forms.Button CloseBtn;
 		private System.Windows.Forms.Button RefreshBtn;
 		private System.Windows.Forms.CheckBox autoscroll;
 		private System.Windows.Forms.RichTextBox rxDataTextBox;
@@ -436,6 +418,7 @@
 		private System.Windows.Forms.TableLayoutPanel layoutPanel;
 		private System.Windows.Forms.ComboBox txBox;
 		private System.Windows.Forms.CheckBox dtr;
+		private System.Windows.Forms.CheckBox openClose;
 
 	}
 }
