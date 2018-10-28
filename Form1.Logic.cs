@@ -228,11 +228,21 @@ namespace SerialTerminal {
 					while ((numBytesInBuf > 0) && comPort.IsOpen) {
 						String strLine = comPort.ReadLine();
 						numBytesInBuf -= (strLine.Length + comPort.NewLine.Length);
-						// apply the highlight filters if asked for
-						if (globalHighlightEnabled)
-							applyFilters(strLine);
-						else
+
+						// decide if the message is highlighted or plotted
+						if (plotOn) {
+							// let plotter handle the message
+							plotMessage(strLine);
+							// append message without highlighting
 							rxDataTextBox.AppendText(strLine + Environment.NewLine);
+						}
+						else {
+							// apply the highlight filters if asked for
+							if (globalHighlightEnabled)
+								applyFilters(strLine);
+							else
+								rxDataTextBox.AppendText(strLine + Environment.NewLine);
+						}
 					}
 				}
 				catch (TimeoutException) {

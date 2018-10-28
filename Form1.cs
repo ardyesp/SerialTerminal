@@ -10,6 +10,7 @@ namespace SerialTerminal {
 	public partial class Form1 : Form, IMessageFilter {
 		bool hovered;
 		bool newTxItem;
+		bool plotOn = false;
 		MethodInfo wndProc;
 
 		private System.Windows.Forms.GroupBox[] groupBox;
@@ -45,6 +46,8 @@ namespace SerialTerminal {
 			rxDataTextBox.MouseEnter += (s, e) => { hovered = true; };
 			rxDataTextBox.MouseLeave += (s, e) => { hovered = false; };
 			wndProc = typeof(Control).GetMethod("WndProc", BindingFlags.NonPublic |	BindingFlags.Instance);
+
+			InitPlot();
 		}
 
 
@@ -58,6 +61,7 @@ namespace SerialTerminal {
 			}
 			return false;
 		}
+
 
 		#region DynamicControls
 
@@ -172,8 +176,8 @@ namespace SerialTerminal {
 				this.groupBox[i].Text = "RegEx" + (i + 1);
 				this.groupBox[i].MouseClick += new System.Windows.Forms.MouseEventHandler(this.groupEnableDisable);
 			}
-
 		}
+
 
 		#endregion
 
@@ -275,8 +279,11 @@ namespace SerialTerminal {
 			// user typed in something
 			newTxItem = true;
 
-			if (e.KeyCode == Keys.Enter)
+			if (e.KeyCode == Keys.Enter) {
 				txData();
+				e.Handled = true;
+				e.SuppressKeyPress = true;				
+			}
 		}
 
 
@@ -504,6 +511,14 @@ namespace SerialTerminal {
 		}
 
 		#endregion
+
+
+		// --------------------------
+		private void tabControl1_Selected(object sender, TabControlEventArgs e) {
+		// --------------------------
+			plotOn = (tabControl1.SelectedTab.Name == "Plot");
+			System.Console.WriteLine(plotOn);
+		}
 
 	}
 }

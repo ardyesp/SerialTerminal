@@ -39,7 +39,22 @@
 			this.layoutPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.highlightedOutputBox = new System.Windows.Forms.RichTextBox();
 			this.sampleInputBox = new System.Windows.Forms.TextBox();
-			this.tabPage1 = new System.Windows.Forms.TabPage();
+			this.Plot = new System.Windows.Forms.TabPage();
+			this.plotInputDisplay = new System.Windows.Forms.TextBox();
+			this.xRange = new System.Windows.Forms.TextBox();
+			this.yMinText = new System.Windows.Forms.TextBox();
+			this.yMaxText = new System.Windows.Forms.TextBox();
+			this.plotValue3 = new System.Windows.Forms.Label();
+			this.plotValue2 = new System.Windows.Forms.Label();
+			this.plotValue1 = new System.Windows.Forms.Label();
+			this.label4 = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
+			this.plotRegex3 = new System.Windows.Forms.TextBox();
+			this.plotRegex2 = new System.Windows.Forms.TextBox();
+			this.plotRegex1 = new System.Windows.Forms.TextBox();
+			this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+			this.Instructions = new System.Windows.Forms.TabPage();
 			this.label2 = new System.Windows.Forms.Label();
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -51,7 +66,9 @@
 			this.tabControl1.SuspendLayout();
 			this.Console.SuspendLayout();
 			this.Highlight.SuspendLayout();
-			this.tabPage1.SuspendLayout();
+			this.Plot.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+			this.Instructions.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -188,7 +205,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.tabControl1.Controls.Add(this.Console);
 			this.tabControl1.Controls.Add(this.Highlight);
-			this.tabControl1.Controls.Add(this.tabPage1);
+			this.tabControl1.Controls.Add(this.Plot);
+			this.tabControl1.Controls.Add(this.Instructions);
 			this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.tabControl1.Location = new System.Drawing.Point(0, 30);
 			this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
@@ -197,6 +215,7 @@
 			this.tabControl1.SelectedIndex = 0;
 			this.tabControl1.Size = new System.Drawing.Size(514, 408);
 			this.tabControl1.TabIndex = 14;
+			this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
 			this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.highlightEnableDisable);
 			// 
 			// Console
@@ -267,16 +286,195 @@
 			this.sampleInputBox.TabIndex = 1;
 			this.sampleInputBox.Text = "Sample Input";
 			// 
-			// tabPage1
+			// Plot
 			// 
-			this.tabPage1.Controls.Add(this.label2);
-			this.tabPage1.Location = new System.Drawing.Point(4, 22);
-			this.tabPage1.Name = "tabPage1";
-			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage1.Size = new System.Drawing.Size(506, 382);
-			this.tabPage1.TabIndex = 2;
-			this.tabPage1.Text = "Instructions";
-			this.tabPage1.UseVisualStyleBackColor = true;
+			this.Plot.Controls.Add(this.plotInputDisplay);
+			this.Plot.Controls.Add(this.xRange);
+			this.Plot.Controls.Add(this.yMinText);
+			this.Plot.Controls.Add(this.yMaxText);
+			this.Plot.Controls.Add(this.plotValue3);
+			this.Plot.Controls.Add(this.plotValue2);
+			this.Plot.Controls.Add(this.plotValue1);
+			this.Plot.Controls.Add(this.label4);
+			this.Plot.Controls.Add(this.label3);
+			this.Plot.Controls.Add(this.label1);
+			this.Plot.Controls.Add(this.plotRegex3);
+			this.Plot.Controls.Add(this.plotRegex2);
+			this.Plot.Controls.Add(this.plotRegex1);
+			this.Plot.Controls.Add(this.chart1);
+			this.Plot.Location = new System.Drawing.Point(4, 22);
+			this.Plot.Margin = new System.Windows.Forms.Padding(0);
+			this.Plot.Name = "Plot";
+			this.Plot.Size = new System.Drawing.Size(506, 382);
+			this.Plot.TabIndex = 3;
+			this.Plot.Text = "  Plot";
+			this.Plot.UseVisualStyleBackColor = true;
+			// 
+			// plotInputDisplay
+			// 
+			this.plotInputDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.plotInputDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.plotInputDisplay.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.plotInputDisplay.Location = new System.Drawing.Point(0, 71);
+			this.plotInputDisplay.Name = "plotInputDisplay";
+			this.plotInputDisplay.ReadOnly = true;
+			this.plotInputDisplay.Size = new System.Drawing.Size(504, 23);
+			this.plotInputDisplay.TabIndex = 14;
+			// 
+			// xRange
+			// 
+			this.xRange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.xRange.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.xRange.Location = new System.Drawing.Point(475, 363);
+			this.xRange.Name = "xRange";
+			this.xRange.Size = new System.Drawing.Size(30, 20);
+			this.xRange.TabIndex = 13;
+			this.xRange.Text = "20";
+			this.xRange.KeyDown += new System.Windows.Forms.KeyEventHandler(this.xRange_KeyDown);
+			this.xRange.Leave += new System.EventHandler(this.xRange_Leave);
+			// 
+			// yMinText
+			// 
+			this.yMinText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.yMinText.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.yMinText.Location = new System.Drawing.Point(-1, 363);
+			this.yMinText.Name = "yMinText";
+			this.yMinText.Size = new System.Drawing.Size(40, 20);
+			this.yMinText.TabIndex = 12;
+			this.yMinText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.yMinText_KeyDown);
+			this.yMinText.Leave += new System.EventHandler(this.yMinText_Leave);
+			// 
+			// yMaxText
+			// 
+			this.yMaxText.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.yMaxText.Location = new System.Drawing.Point(-1, 95);
+			this.yMaxText.Name = "yMaxText";
+			this.yMaxText.Size = new System.Drawing.Size(40, 20);
+			this.yMaxText.TabIndex = 11;
+			this.yMaxText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.yMaxText_KeyDown);
+			this.yMaxText.Leave += new System.EventHandler(this.yMaxText_Leave);
+			// 
+			// plotValue3
+			// 
+			this.plotValue3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.plotValue3.AutoSize = true;
+			this.plotValue3.ForeColor = System.Drawing.Color.Green;
+			this.plotValue3.Location = new System.Drawing.Point(417, 50);
+			this.plotValue3.Name = "plotValue3";
+			this.plotValue3.Size = new System.Drawing.Size(0, 13);
+			this.plotValue3.TabIndex = 10;
+			// 
+			// plotValue2
+			// 
+			this.plotValue2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.plotValue2.AutoSize = true;
+			this.plotValue2.ForeColor = System.Drawing.Color.Navy;
+			this.plotValue2.Location = new System.Drawing.Point(417, 27);
+			this.plotValue2.Name = "plotValue2";
+			this.plotValue2.Size = new System.Drawing.Size(0, 13);
+			this.plotValue2.TabIndex = 9;
+			// 
+			// plotValue1
+			// 
+			this.plotValue1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.plotValue1.AutoSize = true;
+			this.plotValue1.ForeColor = System.Drawing.Color.Maroon;
+			this.plotValue1.Location = new System.Drawing.Point(417, 5);
+			this.plotValue1.Name = "plotValue1";
+			this.plotValue1.Size = new System.Drawing.Size(0, 13);
+			this.plotValue1.TabIndex = 8;
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.ForeColor = System.Drawing.Color.Green;
+			this.label4.Location = new System.Drawing.Point(0, 50);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(45, 13);
+			this.label4.TabIndex = 7;
+			this.label4.Text = "RegEx3";
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.ForeColor = System.Drawing.Color.Navy;
+			this.label3.Location = new System.Drawing.Point(0, 27);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(45, 13);
+			this.label3.TabIndex = 6;
+			this.label3.Text = "RegEx2";
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.ForeColor = System.Drawing.Color.Maroon;
+			this.label1.Location = new System.Drawing.Point(0, 5);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(45, 13);
+			this.label1.TabIndex = 5;
+			this.label1.Text = "RegEx1";
+			// 
+			// plotRegex3
+			// 
+			this.plotRegex3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.plotRegex3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.plotRegex3.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.plotRegex3.ForeColor = System.Drawing.Color.Green;
+			this.plotRegex3.Location = new System.Drawing.Point(45, 46);
+			this.plotRegex3.Name = "plotRegex3";
+			this.plotRegex3.Size = new System.Drawing.Size(370, 23);
+			this.plotRegex3.TabIndex = 3;
+			this.plotRegex3.TextChanged += new System.EventHandler(this.updatePlotRegex);
+			// 
+			// plotRegex2
+			// 
+			this.plotRegex2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.plotRegex2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.plotRegex2.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.plotRegex2.ForeColor = System.Drawing.Color.Navy;
+			this.plotRegex2.Location = new System.Drawing.Point(45, 24);
+			this.plotRegex2.Name = "plotRegex2";
+			this.plotRegex2.Size = new System.Drawing.Size(370, 23);
+			this.plotRegex2.TabIndex = 2;
+			this.plotRegex2.TextChanged += new System.EventHandler(this.updatePlotRegex);
+			// 
+			// plotRegex1
+			// 
+			this.plotRegex1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.plotRegex1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.plotRegex1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.plotRegex1.ForeColor = System.Drawing.Color.Maroon;
+			this.plotRegex1.Location = new System.Drawing.Point(45, 2);
+			this.plotRegex1.Name = "plotRegex1";
+			this.plotRegex1.Size = new System.Drawing.Size(370, 23);
+			this.plotRegex1.TabIndex = 1;
+			this.plotRegex1.TextChanged += new System.EventHandler(this.updatePlotRegex);
+			// 
+			// chart1
+			// 
+			this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.chart1.Location = new System.Drawing.Point(0, 101);
+			this.chart1.Name = "chart1";
+			this.chart1.Size = new System.Drawing.Size(504, 279);
+			this.chart1.TabIndex = 0;
+			this.chart1.Text = "chart1";
+			// 
+			// Instructions
+			// 
+			this.Instructions.Controls.Add(this.label2);
+			this.Instructions.Location = new System.Drawing.Point(4, 22);
+			this.Instructions.Name = "Instructions";
+			this.Instructions.Padding = new System.Windows.Forms.Padding(3);
+			this.Instructions.Size = new System.Drawing.Size(506, 382);
+			this.Instructions.TabIndex = 2;
+			this.Instructions.Text = "Instructions";
+			this.Instructions.UseVisualStyleBackColor = true;
 			// 
 			// label2
 			// 
@@ -355,7 +553,6 @@
 			// 
 			// Form1
 			// 
-			this.AcceptButton = this.SendBtn;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(514, 506);
@@ -384,8 +581,11 @@
 			this.Console.ResumeLayout(false);
 			this.Highlight.ResumeLayout(false);
 			this.Highlight.PerformLayout();
-			this.tabPage1.ResumeLayout(false);
-			this.tabPage1.PerformLayout();
+			this.Plot.ResumeLayout(false);
+			this.Plot.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+			this.Instructions.ResumeLayout(false);
+			this.Instructions.PerformLayout();
 			this.statusStrip1.ResumeLayout(false);
 			this.statusStrip1.PerformLayout();
 			this.ResumeLayout(false);
@@ -410,7 +610,7 @@
 		private System.Windows.Forms.RichTextBox highlightedOutputBox;
 		private System.Windows.Forms.TextBox sampleInputBox;
 		private System.Windows.Forms.ColorDialog colorDialog;
-		private System.Windows.Forms.TabPage tabPage1;
+		private System.Windows.Forms.TabPage Instructions;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.StatusStrip statusStrip1;
 		private System.Windows.Forms.ToolStripStatusLabel logLabel;
@@ -419,6 +619,21 @@
 		private System.Windows.Forms.ComboBox txBox;
 		private System.Windows.Forms.CheckBox dtr;
 		private System.Windows.Forms.CheckBox openClose;
+		private System.Windows.Forms.TabPage Plot;
+		private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+		private System.Windows.Forms.TextBox plotRegex3;
+		private System.Windows.Forms.TextBox plotRegex2;
+		private System.Windows.Forms.TextBox plotRegex1;
+		private System.Windows.Forms.Label plotValue3;
+		private System.Windows.Forms.Label plotValue2;
+		private System.Windows.Forms.Label plotValue1;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.TextBox yMaxText;
+		private System.Windows.Forms.TextBox yMinText;
+		private System.Windows.Forms.TextBox xRange;
+		private System.Windows.Forms.TextBox plotInputDisplay;
 
 	}
 }
