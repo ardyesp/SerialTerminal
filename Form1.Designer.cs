@@ -325,10 +325,12 @@
 			// xRange
 			// 
 			this.xRange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.xRange.BackColor = System.Drawing.Color.LemonChiffon;
+			this.xRange.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.xRange.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.xRange.Location = new System.Drawing.Point(475, 363);
+			this.xRange.Location = new System.Drawing.Point(475, 365);
 			this.xRange.Name = "xRange";
-			this.xRange.Size = new System.Drawing.Size(30, 20);
+			this.xRange.Size = new System.Drawing.Size(30, 13);
 			this.xRange.TabIndex = 13;
 			this.xRange.Text = "20";
 			this.xRange.KeyDown += new System.Windows.Forms.KeyEventHandler(this.xRange_KeyDown);
@@ -337,20 +339,24 @@
 			// yMinText
 			// 
 			this.yMinText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.yMinText.BackColor = System.Drawing.Color.LemonChiffon;
+			this.yMinText.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.yMinText.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.yMinText.Location = new System.Drawing.Point(-1, 363);
+			this.yMinText.Location = new System.Drawing.Point(0, 365);
 			this.yMinText.Name = "yMinText";
-			this.yMinText.Size = new System.Drawing.Size(40, 20);
+			this.yMinText.Size = new System.Drawing.Size(40, 13);
 			this.yMinText.TabIndex = 12;
 			this.yMinText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.yMinText_KeyDown);
 			this.yMinText.Leave += new System.EventHandler(this.yMinText_Leave);
 			// 
 			// yMaxText
 			// 
+			this.yMaxText.BackColor = System.Drawing.Color.LemonChiffon;
+			this.yMaxText.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.yMaxText.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.yMaxText.Location = new System.Drawing.Point(-1, 95);
+			this.yMaxText.Location = new System.Drawing.Point(0, 95);
 			this.yMaxText.Name = "yMaxText";
-			this.yMaxText.Size = new System.Drawing.Size(40, 20);
+			this.yMaxText.Size = new System.Drawing.Size(40, 13);
 			this.yMaxText.TabIndex = 11;
 			this.yMaxText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.yMaxText_KeyDown);
 			this.yMaxText.Leave += new System.EventHandler(this.yMaxText_Leave);
@@ -482,7 +488,7 @@
 			this.label2.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label2.Location = new System.Drawing.Point(6, 12);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(499, 312);
+			this.label2.Size = new System.Drawing.Size(499, 377);
 			this.label2.TabIndex = 2;
 			this.label2.Text = resources.GetString("label2.Text");
 			// 

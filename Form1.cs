@@ -221,6 +221,12 @@ namespace SerialTerminal {
 			// set global setting
 			globalHighlightEnabled = Properties.Settings.Default.GlobalHighlight;
 			changeHighlight(globalHighlightEnabled);
+
+			// load plot saved regular expressions
+			plotRegex1.Text = Properties.Settings.Default.plotRegEx1;
+			plotRegex2.Text = Properties.Settings.Default.plotRegEx2;
+			plotRegex3.Text = Properties.Settings.Default.plotRegEx3;
+			updatePlotRegexImpl();
 			
 			log("Serial Port Terminal ready");
 		}
@@ -254,7 +260,11 @@ namespace SerialTerminal {
 				myCol.Add(bold_checkBox[i].Checked.ToString());
 				Properties.Settings.Default["group" + (i + 1) + "Highlight"] = myCol;
 			}
-			
+
+			Properties.Settings.Default.plotRegEx1 = plotRegex1.Text;
+			Properties.Settings.Default.plotRegEx2 = plotRegex2.Text;
+			Properties.Settings.Default.plotRegEx3 = plotRegex3.Text;
+
 			Properties.Settings.Default.Save();
 		}
 
@@ -354,6 +364,7 @@ namespace SerialTerminal {
 		private void ClearBtn_Click(object sender, EventArgs e) {
 		// --------------------------
 			rxDataTextBox.Text = "";
+			clearPlot();
 		}
 
 		

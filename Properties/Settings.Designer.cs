@@ -215,5 +215,41 @@ namespace SerialTerminal.Properties {
                 this["group10Highlight"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string plotRegEx1 {
+            get {
+                return ((string)(this["plotRegEx1"]));
+            }
+            set {
+                this["plotRegEx1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string plotRegEx2 {
+            get {
+                return ((string)(this["plotRegEx2"]));
+            }
+            set {
+                this["plotRegEx2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string plotRegEx3 {
+            get {
+                return ((string)(this["plotRegEx3"]));
+            }
+            set {
+                this["plotRegEx3"] = value;
+            }
+        }
     }
 }

@@ -53,6 +53,17 @@ namespace SerialTerminal {
 
 
 		// --------------------------
+		private void clearPlot() {
+		// --------------------------
+			plotInputDisplay.Text = "";
+			plotValue1.Text = "";
+			plotValue2.Text = "";
+			plotValue3.Text = "";
+			scaleXRange();
+		}
+
+
+		// --------------------------
 		private void plotMessage(String strLine) {
 		// --------------------------
 			plotInputDisplay.Text = strLine;
@@ -97,9 +108,15 @@ namespace SerialTerminal {
 
 
 
-
 		// --------------------------
 		private void updatePlotRegex(object sender, EventArgs e) {
+		// --------------------------
+			updatePlotRegexImpl();
+		}
+
+
+		// --------------------------
+		private void updatePlotRegexImpl() {
 		// --------------------------
 			if(plotRegex1.Text != "") {
 				try {	        
@@ -213,7 +230,14 @@ namespace SerialTerminal {
 			}
 			catch { };
 
-			chartArea.RecalculateAxesScale();
+			try {
+				chartArea.RecalculateAxesScale();
+			}
+			catch {
+				error("Error: Y Min range higher than Max range");
+				chartArea.AxisY.Minimum = Double.NaN;
+				chartArea.RecalculateAxesScale();
+			};
 		}
 
 
