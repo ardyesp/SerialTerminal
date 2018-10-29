@@ -528,7 +528,6 @@ namespace SerialTerminal {
 		private void tabControl1_Selected(object sender, TabControlEventArgs e) {
 		// --------------------------
 			plotOn = (tabControl1.SelectedTab.Name == "Plot");
-			System.Console.WriteLine(plotOn);
 		}
 
 	}

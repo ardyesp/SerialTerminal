@@ -237,10 +237,11 @@ namespace SerialTerminal {
 							rxDataTextBox.AppendText(strLine + Environment.NewLine);
 						}
 						else {
-							// apply the highlight filters if asked for
 							if (globalHighlightEnabled)
+								// apply the highlight filters if asked for
 								applyFilters(strLine);
 							else
+								// append message without highlighting
 								rxDataTextBox.AppendText(strLine + Environment.NewLine);
 						}
 					}
@@ -250,14 +251,13 @@ namespace SerialTerminal {
 						rxDataTextBox.AppendText(comPort.ReadExisting());
 					return;
 				}
-				catch (Exception ex) {
+				catch {
 					error("Error applying Regex highlighting");
-					System.Console.WriteLine(ex.ToString());
 				}
 
 
 				if (autoscroll.Checked) {
-					rxDataTextBox.HideSelection = false;
+					// rxDataTextBox.HideSelection = false;
 					rxDataTextBox.SelectionStart = rxDataTextBox.Text.Length;
 					rxDataTextBox.ScrollToCaret();
 				}
@@ -270,11 +270,14 @@ namespace SerialTerminal {
 		// --------------------------
 		private void applyFilters(string text) {
 		// --------------------------
-			for (int index = 0; index < numControls; index++) {
-				if (groupHighlightEnabled[index]) {
+			for(int index = 0; index < numControls; index++) {
+				// is this particular regex enabled
+				if(groupHighlightEnabled[index]) {
+					// try to match with input text
 					Match m = regex[index].Match(text);
 
 					if (m.Success) {
+						// match found
 						int curIdx = 0;
 						while (m.Success) {
 							// matching one group only
@@ -291,6 +294,8 @@ namespace SerialTerminal {
 
 						rxDataTextBox.AppendText(text.Substring(curIdx, text.Length - curIdx));
 						rxDataTextBox.AppendText(Environment.NewLine);
+
+						// successful regex skips other regex's
 						return;
 					}
 				}

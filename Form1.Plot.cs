@@ -26,7 +26,11 @@ namespace SerialTerminal {
 			chartArea.AxisY.MajorGrid.LineColor = Color.LightGray;
 			chartArea.AxisX.LabelStyle.Font = new Font("Consolas", 6);
 			chartArea.AxisY.LabelStyle.Font = new Font("Consolas", 6);
+			chartArea.BackColor = Color.Beige;
 			chartArea.AxisX.Minimum = 0;
+			// chartArea.Position.X = 0;
+			// chartArea.Position.Width = 100;
+
 			chart1.ChartAreas.Add(chartArea);
 
 			series1.ChartType = SeriesChartType.FastLine;

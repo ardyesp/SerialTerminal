@@ -325,7 +325,7 @@
 			// xRange
 			// 
 			this.xRange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.xRange.BackColor = System.Drawing.Color.LemonChiffon;
+			this.xRange.BackColor = System.Drawing.Color.Beige;
 			this.xRange.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.xRange.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.xRange.Location = new System.Drawing.Point(475, 365);
@@ -339,7 +339,7 @@
 			// yMinText
 			// 
 			this.yMinText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.yMinText.BackColor = System.Drawing.Color.LemonChiffon;
+			this.yMinText.BackColor = System.Drawing.Color.Beige;
 			this.yMinText.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.yMinText.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.yMinText.Location = new System.Drawing.Point(0, 365);
@@ -351,7 +351,7 @@
 			// 
 			// yMaxText
 			// 
-			this.yMaxText.BackColor = System.Drawing.Color.LemonChiffon;
+			this.yMaxText.BackColor = System.Drawing.Color.Beige;
 			this.yMaxText.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.yMaxText.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.yMaxText.Location = new System.Drawing.Point(0, 95);
@@ -465,9 +465,9 @@
 			this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.chart1.Location = new System.Drawing.Point(0, 101);
+			this.chart1.Location = new System.Drawing.Point(-20, 101);
 			this.chart1.Name = "chart1";
-			this.chart1.Size = new System.Drawing.Size(504, 279);
+			this.chart1.Size = new System.Drawing.Size(544, 279);
 			this.chart1.TabIndex = 0;
 			this.chart1.Text = "chart1";
 			// 
